@@ -1,3 +1,6 @@
 # Credenciais locais: nunca versionar
 .env
 .env.*
+
+# Python
+.venv/
