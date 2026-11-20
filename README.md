@@ -12,4 +12,4 @@ Em fase de fundação. Ainda não há código executável.
 
 ## Documentação
 
-- [PRD](docs/PRD.md): escopo, requisitos e decisões do projeto.
+- Arquitetura: Pluggy (Open Finance) → Supabase (bronze, silver, gold) → dbt → Airflow → Streamlit.

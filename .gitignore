@@ -1,6 +1,8 @@
 # Credenciais locais: nunca versionar
 .env
 .env.*
+!.env.example
 
 # Python
 .venv/
+__pycache__/
