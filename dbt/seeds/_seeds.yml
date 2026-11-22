@@ -17,4 +17,28 @@ seeds:
         data_tests:
           - accepted_values:
               arguments:
-                values: ["receita", "despesa", "transferencia", "investimento"]
+                values: ["receita", "rendimento", "despesa", "transferencia", "investimento"]
+
+  - name: natureza_categorias
+    description: >
+      Exceções por categoria e sentido que prevalecem sobre a natureza do grupo.
+      Ex.: rendimento diário do CDI vem no grupo Investimentos, mas é ganho, não aplicação.
+    config:
+      schema: silver
+      column_types:
+        categoria_id: text
+        sentido: text
+        natureza: text
+    columns:
+      - name: categoria_id
+        data_tests: [not_null]
+      - name: sentido
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["entrada", "saida"]
+      - name: natureza
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["receita", "rendimento", "despesa", "transferencia", "investimento"]

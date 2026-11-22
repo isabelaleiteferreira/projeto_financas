@@ -14,8 +14,18 @@ models:
         data_tests: [unique, not_null]
 
   - name: fct_transacoes
-    description: Transações com natureza financeira e mês
+    description: Transações com sentido, meio de pagamento, natureza financeira e mês
     columns:
+      - name: sentido
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["entrada", "saida"]
+      - name: natureza
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["receita", "rendimento", "despesa", "transferencia", "investimento"]
       - name: transacao_id
         data_tests: [unique, not_null]
       - name: conta_id
@@ -32,10 +42,13 @@ models:
                 field: categoria_id
 
   - name: fluxo_mensal
-    description: Entradas, saídas e resultado por mês
+    description: Receitas, rendimentos, despesas e resultado por mês
     columns:
       - name: mes
         data_tests: [unique, not_null]
 
   - name: despesas_por_categoria
     description: Total de despesas por mês e categoria
+
+  - name: despesas_por_meio_pagamento
+    description: Total de despesas por mês e meio de pagamento

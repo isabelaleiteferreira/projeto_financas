@@ -1,11 +1,12 @@
--- Entradas, saídas e resultado por mês, sem transferências e investimentos
+-- Receitas, rendimentos, despesas e resultado por mês
+-- transferências e investimentos ficam fora para não contar o mesmo dinheiro duas vezes
 
 select
     mes,
-    sum(valor) filter (where valor > 0)       as entradas,
-    -sum(valor) filter (where valor < 0)      as saidas,
-    sum(valor)                                as resultado,
-    count(*)                                  as qtd_transacoes
+    coalesce(sum(valor) filter (where natureza = 'receita'), 0)    as receitas,
+    coalesce(sum(valor) filter (where natureza = 'rendimento'), 0) as rendimentos,
+    coalesce(-sum(valor) filter (where natureza = 'despesa'), 0)   as despesas,
+    sum(valor)                                                     as resultado
 from {{ ref('fct_transacoes') }}
-where natureza in ('receita', 'despesa')
+where natureza in ('receita', 'rendimento', 'despesa')
 group by mes

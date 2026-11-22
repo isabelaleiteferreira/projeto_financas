@@ -31,6 +31,8 @@ select
         at time zone 'America/Sao_Paulo')::date                as data,
     transacao ->> 'description'                                as descricao,
     transacao ->> 'type'                                       as tipo,
+    -- CREDIT/DEBIT indicam entrada/saída de dinheiro, não o cartão de crédito
+    case when transacao ->> 'type' = 'DEBIT' then 'saida' else 'entrada' end as sentido,
     -- sinal vem do tipo: no cartão a Pluggy envia compra com valor positivo
     case when transacao ->> 'type' = 'DEBIT' then -1 else 1 end
         * abs(coalesce(
