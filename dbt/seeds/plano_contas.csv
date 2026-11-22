@@ -1,0 +1,6 @@
+natureza,nome,grupo,entra_no_resultado,ordem
+receita,Receitas,Entradas,true,1
+rendimento,Rendimentos,Entradas,true,2
+despesa,Despesas,Saídas,true,3
+investimento,Aplicações e resgates,Movimentações internas,false,4
+transferencia,Transferências,Movimentações internas,false,5

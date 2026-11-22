@@ -42,3 +42,19 @@ seeds:
           - accepted_values:
               arguments:
                 values: ["receita", "rendimento", "despesa", "transferencia", "investimento"]
+
+  - name: plano_contas
+    description: >
+      Plano de contas gerencial: agrupa cada natureza em Entradas, Saídas ou
+      Movimentações internas e indica se ela entra no resultado do mês.
+    config:
+      schema: silver
+      column_types:
+        natureza: text
+        nome: text
+        grupo: text
+        entra_no_resultado: boolean
+        ordem: integer
+    columns:
+      - name: natureza
+        data_tests: [unique, not_null]

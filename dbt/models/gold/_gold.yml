@@ -23,9 +23,10 @@ models:
                 values: ["entrada", "saida"]
       - name: natureza
         data_tests:
-          - accepted_values:
+          - relationships:
               arguments:
-                values: ["receita", "rendimento", "despesa", "transferencia", "investimento"]
+                to: ref('dim_natureza')
+                field: natureza
       - name: transacao_id
         data_tests: [unique, not_null]
       - name: conta_id
@@ -52,3 +53,12 @@ models:
 
   - name: despesas_por_meio_pagamento
     description: Total de despesas por mês e meio de pagamento
+
+  - name: dim_natureza
+    description: Plano de contas gerencial (Entradas, Saídas, Movimentações internas)
+    columns:
+      - name: natureza
+        data_tests: [unique, not_null]
+
+  - name: fluxo_por_natureza
+    description: Entradas, saídas e saldo por mês e natureza, incluindo movimentações internas
