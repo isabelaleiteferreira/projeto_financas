@@ -1,0 +1,15 @@
+name: financas
+version: "1.0.0"
+profile: financas
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  financas:
+    silver:
+      +schema: silver
+      +materialized: table

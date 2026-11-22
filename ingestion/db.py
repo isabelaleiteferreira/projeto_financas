@@ -19,8 +19,4 @@ def conectar() -> psycopg.Connection:
 
 if __name__ == "__main__":
     with conectar() as conn:
-        print(
-            conn.execute(
-                "SELECT current_user, count(*) FROM bronze.pluggy_raw"
-            ).fetchone()
-        )
+        print(conn.execute("SELECT current_user, count(*) FROM bronze.pluggy_raw").fetchone())
