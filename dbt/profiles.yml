@@ -1,0 +1,15 @@
+# Credenciais lidas do ambiente (.env), nunca versionadas
+financas:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('DB_HOST') }}"
+      port: 5432
+      dbname: postgres
+      # pooler do Supabase exige usuário no formato role.<ref-do-projeto>
+      user: "dbt_transform.{{ env_var('DB_USER').split('.')[1] }}"
+      password: "{{ env_var('DBT_DB_PASSWORD') }}"
+      schema: silver
+      threads: 4
+      sslmode: require

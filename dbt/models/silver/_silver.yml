@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: transacoes
+    description: Transações deduplicadas, com valor em BRL e sinal normalizado (saída negativa)
+    columns:
+      - name: transacao_id
+        data_tests: [unique, not_null]
+      - name: conta_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('contas')
+                field: conta_id
+      - name: data
+        data_tests: [not_null]
+      - name: valor
+        data_tests: [not_null]
+      - name: tipo
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["DEBIT", "CREDIT"]
+
+  - name: contas
+    description: Snapshot mais recente de cada conta
+    columns:
+      - name: conta_id
+        data_tests: [unique, not_null]
+      - name: tipo
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["BANK", "CREDIT"]

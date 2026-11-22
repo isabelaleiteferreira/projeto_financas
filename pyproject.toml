@@ -3,6 +3,8 @@ name = "projeto-financas"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
+    "boto3>=1.44.9",
+    "dbt-postgres>=1.11.0",
     "httpx>=0.28.1",
     "psycopg[binary]>=3.3.9",
     "python-dotenv>=1.2.4",
@@ -14,3 +16,7 @@ dev = [
     "pytest>=9.2.0",
     "ruff>=0.17.6",
 ]
+
+[tool.ruff]
+line-length = 100
+src = ["ingestion"]
