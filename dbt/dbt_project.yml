@@ -5,6 +5,7 @@ profile: financas
 model-paths: ["models"]
 macro-paths: ["macros"]
 test-paths: ["tests"]
+seed-paths: ["seeds"]
 
 clean-targets: ["target", "dbt_packages"]
 
@@ -13,3 +14,9 @@ models:
     silver:
       +schema: silver
       +materialized: table
+    gold:
+      +schema: gold
+      +materialized: table
+      # objetos criados pelo dbt_transform não herdam os default privileges do 0002
+      +grants:
+        select: ["app_user"]

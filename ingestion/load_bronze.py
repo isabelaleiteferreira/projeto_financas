@@ -5,7 +5,7 @@ from psycopg.types.json import Jsonb
 from db import conectar
 from storage import cliente, ler_json, listar
 
-ENDPOINTS = ["accounts", "transactions"]
+ENDPOINTS = ["accounts", "categories", "transactions"]
 
 
 def main() -> None:

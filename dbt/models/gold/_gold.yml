@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: dim_contas
+    description: Contas bancárias e cartões
+    columns:
+      - name: conta_id
+        data_tests: [unique, not_null]
+
+  - name: dim_categorias
+    description: Categorias da Pluggy com grupo e natureza (receita, despesa, transferência, investimento)
+    columns:
+      - name: categoria_id
+        data_tests: [unique, not_null]
+
+  - name: fct_transacoes
+    description: Transações com natureza financeira e mês
+    columns:
+      - name: transacao_id
+        data_tests: [unique, not_null]
+      - name: conta_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_contas')
+                field: conta_id
+      - name: categoria_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_categorias')
+                field: categoria_id
+
+  - name: fluxo_mensal
+    description: Entradas, saídas e resultado por mês
+    columns:
+      - name: mes
+        data_tests: [unique, not_null]
+
+  - name: despesas_por_categoria
+    description: Total de despesas por mês e categoria
