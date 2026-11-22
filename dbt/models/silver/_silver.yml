@@ -33,3 +33,11 @@ models:
           - accepted_values:
               arguments:
                 values: ["BANK", "CREDIT"]
+
+  - name: categorias
+    description: Categorias da Pluggy em português, com o grupo de nível superior
+    columns:
+      - name: categoria_id
+        data_tests: [unique, not_null]
+      - name: grupo
+        data_tests: [not_null]

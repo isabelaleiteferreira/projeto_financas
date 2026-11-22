@@ -1,0 +1,20 @@
+version: 2
+
+seeds:
+  - name: natureza_grupos
+    description: >
+      Natureza financeira de cada grupo de categoria da Pluggy. Transferências e
+      investimentos ficam fora de receitas e despesas para não contar o mesmo dinheiro duas vezes.
+    config:
+      schema: silver
+      column_types:
+        grupo_id: text
+        natureza: text
+    columns:
+      - name: grupo_id
+        data_tests: [unique, not_null]
+      - name: natureza
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["receita", "despesa", "transferencia", "investimento"]

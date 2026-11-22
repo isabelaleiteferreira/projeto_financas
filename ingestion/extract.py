@@ -59,6 +59,11 @@ def main() -> None:
     enviar_json(s3, f"accounts/{pasta}/{carimbo}.json", contas.json())
     print("contas:", len(contas.json()["results"]))
 
+    categorias = httpx.get(f"{BASE_URL}/categories", headers={"X-API-KEY": api_key})
+    categorias.raise_for_status()
+    enviar_json(s3, f"categories/{pasta}/{carimbo}.json", categorias.json())
+    print("categorias:", len(categorias.json()["results"]))
+
     for conta in contas.json()["results"]:
         paginas = buscar_paginas_transacoes(api_key, conta["id"], desde)
         for n, pagina in enumerate(paginas, start=1):
